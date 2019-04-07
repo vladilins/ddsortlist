@@ -31,5 +31,6 @@ export class SkillsComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.timePeriods, event.previousIndex, event.currentIndex);
+    console.log(event);
   }
 }

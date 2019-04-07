@@ -5,8 +5,14 @@
     cdkDropListOrientation="horizontal"
     class="example-list"
     (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="skills"
   >
-    <div class="example-box" *ngFor="let skill of skills" cdkDrag>
+    <div
+      class="example-box"
+      *ngFor="let skill of skills"
+      [cdkDragData]="skill.id"
+      cdkDrag
+    >
       {{ skill.title }}
     </div>
   </div>
