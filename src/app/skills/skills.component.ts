@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { SkillsService } from "../services/skills.service";
+import { Skill } from "../models/skills.model";
 
 @Component({
   selector: "app-skills",
@@ -7,9 +9,17 @@ import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
   styleUrls: ["./skills.component.scss"]
 })
 export class SkillsComponent implements OnInit {
-  constructor() {}
+  skills: Skill[];
 
-  ngOnInit() {}
+  loaded: boolean = false;
+  constructor(private skillsService: SkillsService) {}
+
+  ngOnInit() {
+    this.skillsService.getSkills().subscribe(skills => {
+      this.skills = skills;
+      this.loaded = true;
+    });
+  }
 
   timePeriods = [
     "Bronze age",

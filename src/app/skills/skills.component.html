@@ -6,8 +6,8 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <div class="example-box" *ngFor="let timePeriod of timePeriods" cdkDrag>
-      {{ timePeriod }}
+    <div class="example-box" *ngFor="let skill of skills" cdkDrag>
+      {{ skill.title }}
     </div>
   </div>
 </div>

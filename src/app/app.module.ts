@@ -7,6 +7,7 @@ import { AppComponent } from "./app.component";
 import { SkillsComponent } from "./skills/skills.component";
 import { SkillsCreateComponent } from "./skills/skills-create/skills-create.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent, SkillsComponent, SkillsCreateComponent],
@@ -14,7 +15,8 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     BrowserModule,
     AppRoutingModule,
     DragDropModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FormsModule
   ],
   exports: [MatFormFieldModule],
   providers: [],
