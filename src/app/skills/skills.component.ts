@@ -37,6 +37,9 @@ export class SkillsComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
+
+    // Add to local storage
+    localStorage.setItem("skills", JSON.stringify(this.skills));
     // this.skills.splice(event.previousIndex, event.currentIndex);
     console.log(event);
   }
