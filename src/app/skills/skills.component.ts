@@ -10,6 +10,7 @@ import { Skill } from "../models/skills.model";
 })
 export class SkillsComponent implements OnInit {
   skills: Skill[];
+  skill: Skill;
 
   loaded: boolean = false;
   constructor(private skillsService: SkillsService) {}
@@ -29,8 +30,14 @@ export class SkillsComponent implements OnInit {
     "Long nineteenth century"
   ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.timePeriods, event.previousIndex, event.currentIndex);
+  drop(event: CdkDragDrop<any[]>) {
+    moveItemInArray(
+      this.skills,
+      // event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+    // this.skills.splice(event.previousIndex, event.currentIndex);
     console.log(event);
   }
 }
