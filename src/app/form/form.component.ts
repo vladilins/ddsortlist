@@ -15,12 +15,16 @@ export class FormComponent implements OnInit {
   ngOnInit() {}
 
   data = {
-    template_details: [
+    group: [
       {
-        template_name: "Template One",
-        template_data: [
+        group_title: "",
+        skills: [
           {
-            propertyOne: "Property One"
+            skill: {
+              id: "",
+              years: null,
+              title: ""
+            }
           }
         ]
       }
@@ -31,18 +35,18 @@ export class FormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      template_details: this.fb.array([])
+      group: this.fb.array([])
     });
 
     this.setCompanies();
   }
 
   addNewTemplate() {
-    let control = <FormArray>this.myForm.controls.template_details;
+    let control = <FormArray>this.myForm.controls.group;
     control.push(
       this.fb.group({
-        template_name: [""],
-        template_data: this.fb.array([])
+        group_title: [""],
+        skills: this.fb.array([])
       })
     );
   }
@@ -50,18 +54,18 @@ export class FormComponent implements OnInit {
   addNewProperty(control) {
     control.push(
       this.fb.group({
-        propertyOne: [""]
+        skill: [""]
       })
     );
   }
 
   setCompanies() {
-    let control = <FormArray>this.myForm.controls.template_details;
-    this.data.template_details.forEach(x => {
+    let control = <FormArray>this.myForm.controls.group;
+    this.data.group.forEach(x => {
       control.push(
         this.fb.group({
-          template_name: x.template_name,
-          template_data: this.setProperty(x)
+          group_title: x.group_title,
+          skills: this.setProperty(x)
         })
       );
     });
@@ -69,10 +73,10 @@ export class FormComponent implements OnInit {
 
   setProperty(x) {
     let arr = new FormArray([]);
-    x.template_data.forEach(y => {
+    x.skills.forEach(y => {
       arr.push(
         this.fb.group({
-          propertyOne: y.propertyOne
+          skill: y.skill
         })
       );
     });

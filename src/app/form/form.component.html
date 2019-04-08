@@ -1,46 +1,27 @@
-<button (click)="addNewTemplate()">Add new Template</button><br /><br />
+<button (click)="addNewTemplate()">Add Group</button><br /><br />
 <form [formGroup]="myForm">
-  <div
-    formArrayName="template_details"
-    cdkDropList
-    (cdkDropListDropped)="drop($event)"
-    [cdkDropListData]="myForm.get('template_details').controls"
-  >
-    <div
-      *ngFor="
-        let temp of myForm.get('template_details').controls;
-        let i = index
-      "
-      [cdkDragData]="temp"
-      cdkDrag
-    >
-      <fieldset class="margin">
-        <legend>
-          <h3>Template {{ i + 1 }}:</h3>
-        </legend>
-        <span cdkDragHandle class="drag">Drag</span>
+  <div formArrayName="group">
+    <div *ngFor="let temp of myForm.get('group').controls; let i = index">
+      <fieldset>
         <div [formGroupName]="i">
-          <label>Template Name: </label>
-          <input formControlName="template_name" />
-          <div formArrayName="template_data">
+          <label>Group: </label>
+          <input formControlName="group_title" />
+          <div formArrayName="skills">
             <div
               *ngFor="
-                let property of temp.get('template_data').controls;
+                let property of temp.get('skills').controls;
                 let j = index
               "
             >
-              <fieldset class="right">
-                <legend>
-                  <h4>Property {{ j + 1 }}</h4>
-                </legend>
+              <fieldset>
                 <div [formGroupName]="j">
-                  <label>Property Name:</label>
-                  <input formControlName="propertyOne" />
+                  <label>Skill: </label>
+                  <input formControlName="skill.title" />
                 </div>
               </fieldset>
             </div>
-            <button (click)="addNewProperty(temp.controls.template_data)">
-              Add new Property
+            <button (click)="addNewProperty(temp.controls.skills)">
+              Add Skill
             </button>
           </div>
         </div>
