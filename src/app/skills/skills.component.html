@@ -13,7 +13,12 @@
   <app-skills-create></app-skills-create>
 </ng-template>
 
-<div class="container">
+<app-skills-group></app-skills-group>
+
+<div class="container" *ngFor="let group of groups">
+  <h4>
+    {{ group.title }}
+  </h4>
   <div
     cdkDropList
     cdkDropListOrientation="horizontal"

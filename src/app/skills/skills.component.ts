@@ -11,7 +11,7 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./skills.component.scss"]
 })
 export class SkillsComponent implements OnInit {
-  group: Skill[] = [];
+  groups: Skill[] = [];
   skills: Skill[];
   skill: Skill;
 
@@ -26,6 +26,10 @@ export class SkillsComponent implements OnInit {
   ngOnInit() {
     this.skillsService.getSkills().subscribe(skills => {
       this.skills = skills;
+      this.loaded = true;
+    });
+    this.skillsService.getGroups().subscribe(groups => {
+      this.groups = groups;
       this.loaded = true;
     });
   }

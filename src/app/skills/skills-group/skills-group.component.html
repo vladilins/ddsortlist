@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="skill">Skill</label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          [(ngModel)]="title"
+          required
+        />
+      </div>
+
+      <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+    </form>
+  </div>
+</div>

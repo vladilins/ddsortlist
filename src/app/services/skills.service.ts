@@ -1,12 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Skill } from "../models/skills.model";
 import { Observable, of } from "rxjs";
+import { Group } from "../models/group.model";
 
 @Injectable({
   providedIn: "root"
 })
 export class SkillsService {
   skills: Skill[] = [];
+  groups: Group[];
 
   constructor() {}
 
@@ -19,6 +21,15 @@ export class SkillsService {
 
     return of(this.skills);
   }
+  getGroups(): Observable<Group[]> {
+    if (localStorage.getItem("groups") === null) {
+      this.groups = [];
+    } else {
+      this.groups = JSON.parse(localStorage.getItem("groups"));
+    }
+
+    return of(this.groups);
+  }
 
   addSkill(skill: Skill) {
     this.skills.unshift(skill);
@@ -26,6 +37,13 @@ export class SkillsService {
 
     // Add to local storage
     localStorage.setItem("skills", JSON.stringify(this.skills));
+  }
+  addGroup(group: Group) {
+    this.groups.unshift(group);
+    console.log(group);
+
+    // Add to local storage
+    localStorage.setItem("groups", JSON.stringify(this.groups));
   }
 
   // getskill(id: string): Observable<skill> {

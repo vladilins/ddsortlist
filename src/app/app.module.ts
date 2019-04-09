@@ -10,13 +10,17 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormComponent } from "./form/form.component";
+import { GroupComponent } from './group/group.component';
+import { SkillsGroupComponent } from './skills/skills-group/skills-group.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SkillsComponent,
     SkillsCreateComponent,
-    FormComponent
+    FormComponent,
+    GroupComponent,
+    SkillsGroupComponent
   ],
   imports: [
     BrowserModule,
