@@ -10,7 +10,7 @@ import { Skill } from "src/app/models/skills.model";
 })
 export class SkillsGroupComponent implements OnInit {
   title: string;
-  skills: Skill[];
+  skills: Skill[] = null;
   constructor(private skillsService: SkillsService) {}
 
   ngOnInit() {}

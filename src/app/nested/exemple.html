@@ -1,0 +1,101 @@
+<h2>User Form</h2>
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      class="form-control"
+      placeholder="Name"
+      name="name"
+      formControlName="name"
+      required
+    />
+  </div>
+  <button type="button" class="btn btn-primary btn-sm" (click)="addNewCity()">
+    Add New City
+  </button>
+  <div formArrayName="cities">
+    <div *ngFor="let city of myForm.get('cities').controls; let i = index">
+      <fieldset>
+        <legend>
+          <h4>
+            City {{ i + 1 }}:<button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteCity(i)"
+            >
+              Remove City
+            </button>
+          </h4>
+        </legend>
+        <div [formGroupName]="i">
+          <div class="form-inline">
+            <div class="form-group">
+              <label class="col-form-label" for="city">City</label>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                placeholder="City"
+                name="type"
+                formControlName="city"
+                required
+              />
+              <button
+                type="button"
+                class="btn btn-success btn-sm"
+                (click)="addNewAddressLine(city.controls.addressLines)"
+              >
+                Add New Address Line
+              </button>
+            </div>
+          </div>
+          <div class="form-inline">
+            <div class="form-group">
+              <div formArrayName="addressLines">
+                <div
+                  *ngFor="
+                    let lines of city.get('addressLines').controls;
+                    let j = index
+                  "
+                >
+                  <div [formGroupName]="j">
+                    <div class="form-group">
+                      <label class="col-form-label" for="emailId"
+                        >Address Line {{ j + 1 }}</label
+                      >
+                      <input
+                        formControlName="addressLine"
+                        class="form-control"
+                        type="email"
+                        placeholder="Address lines"
+                        id="address"
+                        name="address"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="
+                          deleteAddressLine(city.controls.addressLines, j)
+                        "
+                      >
+                        Remove Address Line
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="button" class="btn btn-basic">Cancel</button>
+</form>
+
+<pre>{{ myForm.value | json }}</pre>

@@ -12,6 +12,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormComponent } from "./form/form.component";
 import { GroupComponent } from './group/group.component';
 import { SkillsGroupComponent } from './skills/skills-group/skills-group.component';
+import { NestedComponent } from './nested/nested.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SkillsGroupComponent } from './skills/skills-group/skills-group.compone
     SkillsCreateComponent,
     FormComponent,
     GroupComponent,
-    SkillsGroupComponent
+    SkillsGroupComponent,
+    NestedComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,145 @@
+<!-- <div
+  cdkDropList
+  [cdkDropListData]="groups"
+  (cdkDropListDropped)="dropGroup($event)"
+>
+  <div
+    cdkDropListGroup
+    class="example-container container"
+    *ngFor="let group of groups"
+    cdkDrag
+    [cdkDragData]="group"
+  >
+    <h2>{{ group.title }}</h2>
+    <div
+      cdkDropList
+      class="example-list"
+      id="{{ group.id }}"
+      [cdkDropListData]="group.items"
+      (cdkDropListDropped)="dropItem($event)"
+      [cdkDropListConnectedTo]="getConnectedList()"
+      cdkDropListOrientation="horizontal"
+    >
+      <div
+        class="example-box"
+        *ngFor="let item of group.items"
+        cdkDrag
+        [cdkDragData]="item"
+      >
+        {{ item.name }}
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="form-group">
+        <label for="group">Group</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          name="name"
+          formControlName="name"
+          required
+        />
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        (click)="addNewGroup()"
+      >
+        Add New Group
+      </button>
+
+      <div formArrayName="groups">
+        <div *ngFor="let group of myForm.get('groups').controls; let i = index">
+          <fieldset>
+            <legend>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="deleteGroup(i)"
+              >
+                Remove Group
+              </button>
+            </legend>
+            <div [formGroupName]="i">
+              <div class="form-inline">
+                <div class="form-group">
+                  <label class="col-form-label" for="skill">Skill</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    placeholder="title"
+                    name="type"
+                    formControlName="title"
+                    required
+                  />
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="years"
+                    placeholder="years"
+                    name="type"
+                    formControlName="years"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-success btn-sm"
+                    (click)="addNewSkill(group.controls.skills)"
+                  >
+                    Add New Skill
+                  </button>
+                </div>
+              </div>
+              <div class="form-inline">
+                <div class="form-group">
+                  <div formArrayName="skills">
+                    <div
+                      *ngFor="
+                        let skill of group.get('skills').controls;
+                        let j = index
+                      "
+                    >
+                      <div [formGroupName]="j">
+                        <div class="form-group">
+                          <label class="col-form-label" for="emailId"
+                            >Address Skill {{ j + 1 }}</label
+                          >
+                          <input
+                            formControlName="addressLine"
+                            class="form-control"
+                            type="text"
+                            placeholder="Address skill"
+                            id="address"
+                            name="address"
+                          />
+                          <button
+                            type="button"
+                            class="btn btn-danger btn-sm"
+                            (click)="deleteSkill(group.controls.skills, j)"
+                          >
+                            Delete Skill
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <!-- <button type="submit" class="btn btn-success">Submit</button>
+      <button type="button" class="btn btn-basic">Cancel</button> -->
+    </form>
+  </div>
+</div>

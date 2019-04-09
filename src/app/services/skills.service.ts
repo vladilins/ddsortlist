@@ -42,6 +42,7 @@ export class SkillsService {
     this.groups.unshift(group);
     console.log(group);
 
+    // let endGroup = this.groups.skills.push(this.skills);
     // Add to local storage
     localStorage.setItem("groups", JSON.stringify(this.groups));
   }

@@ -6,6 +6,8 @@ import {
   transferArrayItem
 } from "@angular/cdk/drag-drop";
 
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
@@ -13,6 +15,14 @@ import {
 })
 export class FormComponent implements OnInit {
   ngOnInit() {}
+
+  constructor(private fb: FormBuilder, private modalService: NgbModal) {
+    this.myForm = this.fb.group({
+      group: this.fb.array([])
+    });
+
+    this.setCompanies();
+  }
 
   data = {
     group: [
@@ -31,15 +41,9 @@ export class FormComponent implements OnInit {
     ]
   };
 
+  closeResult: string;
+
   myForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.myForm = this.fb.group({
-      group: this.fb.array([])
-    });
-
-    this.setCompanies();
-  }
 
   addNewTemplate() {
     let control = <FormArray>this.myForm.controls.group;
@@ -97,6 +101,42 @@ export class FormComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+    }
+  }
+  // drop(event: CdkDragDrop<any[]>) {
+  //   moveItemInArray(
+  //     this.skills,
+  //     // event.container.data,
+  //     event.previousIndex,
+  //     event.currentIndex
+  //   );
+
+  //   // Add to local storage
+  //   localStorage.setItem("skills", JSON.stringify(this.skills));
+  //   // this.skills.splice(event.previousIndex, event.currentIndex);
+  //   console.log(event);
+  // }
+
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
+    } else {
+      return `with: ${reason}`;
     }
   }
 }
