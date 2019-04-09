@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -22,7 +22,6 @@ export class FormComponent implements OnInit {
   data = {
     skillsGroup: [
       {
-        groupName: "",
         skills: [
           {
             title: "",
@@ -64,16 +63,15 @@ export class FormComponent implements OnInit {
     this.data.skillsGroup.forEach(x => {
       control.push(
         this.fb.group({
-          groupName: x.groupName,
           skills: this.setSkillsArray(x)
         })
       );
     });
   }
 
-  setSkillsArray(x) {
+  setSkillsArray(x: { skills: any }) {
     let arr = new FormArray([]);
-    x.skills.forEach((y: { title: any; years: any }) => {
+    x.skills.forEach((y: { title: string; years: number }) => {
       arr.push(
         this.fb.group({
           title: y.title,
