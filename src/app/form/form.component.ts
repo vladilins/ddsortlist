@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
+import { FormBuilder, FormGroup, FormArray, Validators } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -14,79 +14,77 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./form.component.scss"]
 })
 export class FormComponent implements OnInit {
+  myForm: FormGroup;
+  closeResult: string;
+
   ngOnInit() {}
 
-  constructor(private fb: FormBuilder, private modalService: NgbModal) {
-    this.myForm = this.fb.group({
-      group: this.fb.array([])
-    });
-
-    this.setCompanies();
-  }
-
   data = {
-    group: [
+    skillsGroup: [
       {
-        group_title: "",
+        groupName: "",
         skills: [
           {
-            skill: {
-              id: "",
-              years: null,
-              title: ""
-            }
+            title: "",
+            years: null
           }
         ]
       }
     ]
   };
 
-  closeResult: string;
+  constructor(private modalService: NgbModal, private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      skillsGroups: this.fb.array([])
+    });
 
-  myForm: FormGroup;
+    this.setSkillsGroups();
+  }
 
-  addNewTemplate() {
-    let control = <FormArray>this.myForm.controls.group;
+  addSkillsGroup() {
+    let control = <FormArray>this.myForm.controls.skillsGroups;
     control.push(
       this.fb.group({
-        group_title: [""],
         skills: this.fb.array([])
       })
     );
   }
 
-  addNewProperty(control) {
+  addSkillsArray(control) {
     control.push(
       this.fb.group({
-        skill: [""]
+        title: [""],
+        years: [null]
       })
     );
   }
 
-  setCompanies() {
-    let control = <FormArray>this.myForm.controls.group;
-    this.data.group.forEach(x => {
+  setSkillsGroups() {
+    let control = <FormArray>this.myForm.controls.skillsGroup;
+    this.data.skillsGroup.forEach(x => {
       control.push(
         this.fb.group({
-          group_title: x.group_title,
-          skills: this.setProperty(x)
+          groupName: x.groupName,
+          skills: this.setSkillsArray(x)
         })
       );
     });
   }
 
-  setProperty(x) {
+  setSkillsArray(x) {
     let arr = new FormArray([]);
-    x.skills.forEach(y => {
+    x.skills.forEach((y: { title: any; years: any }) => {
       arr.push(
         this.fb.group({
-          skill: y.skill
+          title: y.title,
+          years: y.years
         })
       );
     });
     return arr;
   }
 
+  // Drag and Drop
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -117,6 +115,7 @@ export class FormComponent implements OnInit {
   //   console.log(event);
   // }
 
+  // Hide-open form
   open(content) {
     this.modalService
       .open(content, { ariaLabelledBy: "modal-basic-title" })

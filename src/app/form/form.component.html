@@ -1,24 +1,33 @@
-<button (click)="addNewTemplate()">Add Group</button><br /><br />
+<button (click)="addSkillsGroup()">Add new Skills Group</button><br /><br />
 <form [formGroup]="myForm">
-  <div formArrayName="group">
-    <div *ngFor="let skills of myForm.get('group').controls; let i = index">
+  <div formArrayName="skillsGroup">
+    <div *ngFor="let temp of myForm.get('skillsGroup').controls; let i = index">
       <fieldset>
+        <legend>
+          <h3>Skills Group {{ i + 1 }}:</h3>
+        </legend>
         <div [formGroupName]="i">
-          <label>Group: </label>
-          <input formControlName="group_title" />
           <div formArrayName="skills">
             <div
-              *ngFor="let skill of skills.get('skills').controls; let j = index"
+              *ngFor="
+                let property of temp.get('skills').controls;
+                let j = index
+              "
             >
               <fieldset>
+                <legend>
+                  <h4>Skills Array {{ j + 1 }}</h4>
+                </legend>
                 <div [formGroupName]="j">
-                  <label>Skill: </label>
-                  <input formControlName="skill.title" />
+                  <label>Skills Title:</label>
+                  <input formControlName="title" />
+                  <label>Skills Years:</label>
+                  <input formControlName="years" />
                 </div>
               </fieldset>
             </div>
-            <button (click)="addNewProperty(skills.controls.skills)">
-              Add Skill
+            <button (click)="addSkillsArray(temp.controls.skillsGroup)">
+              Add New Skill
             </button>
           </div>
         </div>
@@ -29,103 +38,3 @@
 </form>
 
 <pre>{{ myForm.value | json }}</pre>
-
-<!-- New -->
-
-<!-- Group Form -->
-
-<div class="card">
-  <div class="card-body">
-    <form (ngSubmit)="addNewTemplate()">
-      <div class="form-group">
-        <label for="skill">Group</label>
-        <input
-          type="text"
-          class="form-control"
-          name="title"
-          [(ngModel)]="title"
-          required
-        />
-      </div>
-
-      <input type="submit" value="Submit" class="btn btn-primary btn-block" />
-    </form>
-  </div>
-</div>
-
-<!-- Display group -->
-<div
-  class="container"
-  *ngFor="let skills of myForm.get('group').controls; let i = index"
->
-  <h4>
-    {{ skills.title }}
-  </h4>
-  <div
-    cdkDropList
-    cdkDropListOrientation="horizontal"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-    [cdkDropListData]="skills"
-  >
-    <!-- Display skills -->
-    <div
-      class="example-box"
-      *ngFor="let skill of skills.get('skills').controls; let j = index"
-      [cdkDragData]="skill"
-      cdkDrag
-    >
-      <!-- Skill create form -->
-      <ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Add Skills</h4>
-          <button
-            type="button"
-            class="close"
-            aria-label="Close"
-            (click)="modal.dismiss('Cross click')"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <form (ngSubmit)="addNewProperty(skill.controls.skills)">
-              <div class="form-group">
-                <label for="skill">Skill</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  name="title"
-                  [(ngModel)]="skill.title"
-                  required
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="years">Years</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  [(ngModel)]="skill.years"
-                  name="years"
-                  required
-                />
-              </div>
-
-              <input
-                type="submit"
-                value="Submit"
-                class="btn btn-primary btn-block"
-              />
-            </form>
-          </div>
-        </div>
-      </ng-template>
-      {{ skill.title }} / {{ skill.years }}
-    </div>
-    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">
-      Add
-    </button>
-  </div>
-</div>

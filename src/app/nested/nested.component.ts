@@ -19,7 +19,7 @@ export class NestedComponent implements OnInit {
       groups: this.fb.array([])
     });
 
-    this.setGroups();
+    // this.setGroups();
   }
 
   myForm: FormGroup;
@@ -39,60 +39,60 @@ export class NestedComponent implements OnInit {
     ]
   };
 
-  onSubmit() {
-    alert(this.myForm.value);
-  }
+  // onSubmit() {
+  //   alert(this.myForm.value);
+  // }
 
-  addNewGroup() {
-    let control = <FormArray>this.myForm.controls.skills;
-    control.push(
-      this.fb.skills({
-        skills: [""],
-        skill: this.fb.array([])
-      })
-    );
-  }
+  // addNewGroup() {
+  //   let control = <FormArray>this.myForm.controls.skills;
+  //   control.push(
+  //     this.fb.skills({
+  //       skills: [""],
+  //       skill: this.fb.array([])
+  //     })
+  //   );
+  // }
 
-  deleteGroup(index) {
-    let control = <FormArray>this.myForm.controls.groups;
-    control.removeAt(index);
-  }
+  // deleteGroup(index) {
+  //   let control = <FormArray>this.myForm.controls.groups;
+  //   control.removeAt(index);
+  // }
 
-  addNewSkill(control) {
-    control.push(
-      this.fb.group({
-        skill: [""]
-      })
-    );
-  }
+  // addNewSkill(control) {
+  //   control.push(
+  //     this.fb.group({
+  //       skill: [""]
+  //     })
+  //   );
+  // }
 
-  deleteSkill(control, index) {
-    control.removeAt(index);
-  }
+  // deleteSkill(control, index) {
+  //   control.removeAt(index);
+  // }
 
-  setGroups() {
-    let control = <FormArray>this.myForm.controls.groups;
-    this.data.groups.forEach(x => {
-      control.push(
-        this.fb.group({
-          group: x.group,
-          skills: this.setSkills(x)
-        })
-      );
-    });
-  }
+  // setGroups() {
+  //   let control = <FormArray>this.myForm.controls.groups;
+  //   this.data.groups.forEach(x => {
+  //     control.push(
+  //       this.fb.group({
+  //         group: x.group,
+  //         skills: this.setSkills(x)
+  //       })
+  //     );
+  //   });
+  // }
 
-  setSkills(x) {
-    let arr = new FormArray([]);
-    x.skills.forEach(y => {
-      arr.push(
-        this.fb.group({
-          skill: y.skill
-        })
-      );
-    });
-    return arr;
-  }
+  // setSkills(x) {
+  //   let arr = new FormArray([]);
+  //   x.skills.forEach(y => {
+  //     arr.push(
+  //       this.fb.group({
+  //         skill: y.skill
+  //       })
+  //     );
+  //   });
+  //   return arr;
+  // }
   ngOnInit() {}
 
   groups = [
