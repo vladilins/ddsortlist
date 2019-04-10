@@ -10,10 +10,10 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormComponent } from "./form/form.component";
-import { GroupComponent } from './group/group.component';
-import { SkillsGroupComponent } from './skills/skills-group/skills-group.component';
-import { NestedComponent } from './nested/nested.component';
-import { CityComponent } from './city/city.component';
+import { GroupComponent } from "./group/group.component";
+import { SkillsGroupComponent } from "./skills/skills-group/skills-group.component";
+import { NestedComponent } from "./nested/nested.component";
+import { CityComponent } from "./city/city.component";
 
 @NgModule({
   declarations: [

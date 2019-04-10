@@ -1,19 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
-
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem
-} from "@angular/cdk/drag-drop";
-import { SkillsService } from "../services/skills.service";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
-  selector: "app-city",
-  templateUrl: "./city.component.html",
-  styleUrls: ["./city.component.scss"]
+  selector: "app-employee-group",
+  templateUrl: "./employee-group.component.html",
+  styleUrls: ["./employee-group.component.scss"]
 })
-export class CityComponent implements OnInit {
+export class EmployeeGroupComponent implements OnInit {
   ngOnInit() {}
   data = {
     skillGroups: [
@@ -31,7 +25,9 @@ export class CityComponent implements OnInit {
 
   myForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private skillsService: SkillsService) {
+  closeResult: string;
+
+  constructor(private fb: FormBuilder, private modalService: NgbModal) {
     this.myForm = this.fb.group({
       skillGroups: this.fb.array([])
     });
@@ -40,9 +36,6 @@ export class CityComponent implements OnInit {
   }
 
   onSubmit() {
-    // const skillGroups = this.myForm.value;
-    // // Add skill groups
-    // this.skillsService.addGroup(skillGroups);
     console.log(this.myForm.value);
   }
 
@@ -99,33 +92,27 @@ export class CityComponent implements OnInit {
     return arr;
   }
 
-  // Drag and Drop
-  dropItem(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
+  // Pop up Form
+  open(content) {
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title" })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
       );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return "by pressing ESC";
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return "by clicking on a backdrop";
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      return `with: ${reason}`;
     }
-  }
-
-  getConnectedList(): any[] {
-    return this.data.skillGroups.map(x => `${x.skillArr}`);
-  }
-
-  dropGroup(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
   }
 }

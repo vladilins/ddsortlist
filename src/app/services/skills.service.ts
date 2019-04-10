@@ -8,7 +8,17 @@ import { Group } from "../models/group.model";
 })
 export class SkillsService {
   skills: Skill[] = [];
-  groups: Group[];
+  groups: [
+    {
+      groupName: "";
+      skillArr: [
+        {
+          skillName: "";
+          years: null;
+        }
+      ];
+    }
+  ];
 
   constructor() {}
 
@@ -38,7 +48,7 @@ export class SkillsService {
     // Add to local storage
     localStorage.setItem("skills", JSON.stringify(this.skills));
   }
-  addGroup(group: Group) {
+  addGroup(group) {
     this.groups.unshift(group);
     console.log(group);
 
