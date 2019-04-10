@@ -4,6 +4,8 @@ import { SkillsService } from "../services/skills.service";
 import { Skill } from "../models/skills.model";
 
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import { FormGroup } from "@angular/forms";
+import { Group } from "../models/group.model";
 
 @Component({
   selector: "app-skills",
@@ -11,11 +13,12 @@ import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ["./skills.component.scss"]
 })
 export class SkillsComponent implements OnInit {
-  groups: Skill[] = [];
+  groups: Group[] = [];
   skills: Skill[];
   skill: Skill;
 
   closeResult: string;
+  formJoin: FormGroup;
 
   loaded: boolean = false;
   constructor(
@@ -31,6 +34,10 @@ export class SkillsComponent implements OnInit {
     this.skillsService.getGroups().subscribe(groups => {
       this.groups = groups;
       this.loaded = true;
+    });
+    this.formJoin = new FormGroup({
+      // form1: this.groups,
+      // form2: this.skills
     });
   }
 

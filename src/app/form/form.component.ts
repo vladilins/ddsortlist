@@ -24,8 +24,7 @@ export class FormComponent implements OnInit {
       {
         skills: [
           {
-            title: "",
-            years: null
+            skill: ""
           }
         ]
       }
@@ -34,7 +33,11 @@ export class FormComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      skillsGroups: this.fb.array([])
+      skillsGroups: this.fb.array([
+        {
+          skills: this.fb.array([])
+        }
+      ])
     });
 
     this.setSkillsGroups();
@@ -52,8 +55,7 @@ export class FormComponent implements OnInit {
   addSkillsArray(control) {
     control.push(
       this.fb.group({
-        title: [""],
-        years: [null]
+        skill: [""]
       })
     );
   }
@@ -69,13 +71,12 @@ export class FormComponent implements OnInit {
     });
   }
 
-  setSkillsArray(x: { skills: any }) {
+  setSkillsArray(x) {
     let arr = new FormArray([]);
-    x.skills.forEach((y: { title: string; years: number }) => {
+    x.skills.forEach(y => {
       arr.push(
         this.fb.group({
-          title: y.title,
-          years: y.years
+          skill: y.skill
         })
       );
     });

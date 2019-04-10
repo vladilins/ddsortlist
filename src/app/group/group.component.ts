@@ -1,32 +1,58 @@
 import { Component, OnInit, ViewContainerRef, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 
 import { ComponentFactoryResolver } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-group",
-  template: `
-    <p>Paragraph One</p>
-    <template #clone>
-      <p>Paragraph Two</p>
-    </template>
-    <p>Paragraph Three</p>
-
-    <button (click)="cloneTemplate()">Clone Template</button>
-
-    <div #container></div>
-  `,
+  templateUrl: "./group.component.html",
   styleUrls: ["./group.component.scss"]
 })
 export class GroupComponent {
-  // What to clone
-  @ViewChild("clone") template;
+  myForm: FormGroup;
 
-  // Where to insert the cloned content
-  @ViewChild("container", { read: ViewContainerRef }) container;
+  constructor(private fb: FormBuilder) {}
 
-  constructor() {}
+  ngOnInit() {
+    this.myForm = this.fb.group({
+      skillsGroups: this.fb.array([
+        {
+          skills: this.fb.array([])
+        }
+      ])
+    });
+  }
 
-  cloneTemplate() {
-    this.container.createEmbeddedView(this.template);
+  get skillsGroups() {
+    return this.myForm.get("skillGroups") as FormArray;
+  }
+
+  get skills() {
+    return this.myForm.get("skills") as FormArray;
+  }
+
+  addSkillsArray() {
+    const skillArray = this.fb.control({
+      skills: []
+    });
+
+    this.skillsGroups.push(skillArray);
+  }
+
+  addSkills() {
+    const skill = this.fb.group({
+      title: [],
+      years: []
+    });
+
+    this.skills.push(skill);
+  }
+
+  deleteSkillsArray(i) {
+    this.skillsGroups.removeAt(i);
+  }
+
+  deleteSkills(i) {
+    this.skills.removeAt(i);
   }
 }

@@ -13,6 +13,7 @@ import { FormComponent } from "./form/form.component";
 import { GroupComponent } from './group/group.component';
 import { SkillsGroupComponent } from './skills/skills-group/skills-group.component';
 import { NestedComponent } from './nested/nested.component';
+import { CityComponent } from './city/city.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NestedComponent } from './nested/nested.component';
     FormComponent,
     GroupComponent,
     SkillsGroupComponent,
-    NestedComponent
+    NestedComponent,
+    CityComponent
   ],
   imports: [
     BrowserModule,

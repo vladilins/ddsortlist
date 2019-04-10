@@ -1,49 +1,19 @@
-<!-- <form [formGroup]="myForm">
-  Value: {{ myForm.value | json }}
+<h2>User Form</h2>
 
-  <hr />
-
-  <div formArrayName="skills">
-    <div
-      *ngFor="let skill of skills.controls; let j = index"
-      [formGroupName]="j"
-    >
-      <mat-form-field class="xs">
-        <input matInput placeholder="title" formControlName="title" />
-      </mat-form-field>
-
-      <mat-form-field class="xs">
-        <input matInput placeholder="years" formControlName="years" />
-      </mat-form-field>
-
-      <button mat-raised-button color="warn" (click)="deleteSkills()">
-        Delete
-      </button>
-    </div>
-  </div>
-
-  <button mat-raised-button color="primary" (click)="addSkills()">
-    Add Phone Number
-  </button>
-</form> -->
-
-Value: {{ myForm.value | json }}
-
-<hr />
-
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
   <button
     style="margin-top:5px; margin-bottom:5px;"
     type="button"
     class="btn btn-primary btn-sm"
-    (click)="addSkillsArray()"
+    (click)="addNewCity()"
   >
-    Add New Group
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New
+    Group
   </button>
-  <div formArrayName="skillsGroups">
+  <div formArrayName="cities">
     <div
       style="margin-top:5px; margin-bottom:5px;"
-      *ngFor="let skillsArray of myForm.get('skillsGroups'); let i = index"
+      *ngFor="let city of myForm.get('cities').controls; let i = index"
     >
       <fieldset>
         <legend>
@@ -52,21 +22,26 @@ Value: {{ myForm.value | json }}
               style="margin-left:35px;"
               type="button"
               class="btn btn-danger"
-              (click)="deleteSkillsArray(i)"
+              (click)="deleteCity(i)"
             >
+              <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
               Remove Group
             </button>
           </h4>
         </legend>
-        <div [formControlName]="i">
+        <div [formGroupName]="i">
           <div class="form-inline">
             <div class="form-group">
               <button
                 style="margin-right:5px;"
                 type="button"
                 class="btn btn-success btn-sm"
-                (click)="addSkills()"
+                (click)="addNewAddressLine(city.controls.addressLines)"
               >
+                <span
+                  class="glyphicon glyphicon-plus"
+                  aria-hidden="true"
+                ></span>
                 Add New Skill
               </button>
             </div>
@@ -76,24 +51,21 @@ Value: {{ myForm.value | json }}
               <div formArrayName="addressLines">
                 <div
                   style="margin-top:5px; margin-bottom:5px;"
-                  *ngFor="let lines of myForm.controls; let j = index"
+                  *ngFor="
+                    let lines of city.get('addressLines').controls;
+                    let j = index
+                  "
                 >
                   <div [formGroupName]="j">
                     <div class="form-group">
-                      <label
-                        style="margin-right:5px;"
-                        class="col-form-label"
-                        for="emailId"
-                        >Skill {{ j + 1 }}</label
-                      >
                       <input
-                        formControlName="title"
+                        formControlName="addressLine"
                         class="form-control"
                         style="margin-right:5px;"
                         type="text"
                         placeholder="Title"
-                        id="title"
-                        name="title"
+                        id="address"
+                        name="address"
                       />
                       <input
                         formControlName="years"
@@ -102,13 +74,15 @@ Value: {{ myForm.value | json }}
                         type="number"
                         placeholder="Years"
                         id="years"
-                        name="title"
+                        name="years"
                       />
                       <button
                         style="margin-right:5px;"
                         type="button"
                         class="btn btn-danger btn-sm"
-                        (click)="deleteSkills(j)"
+                        (click)="
+                          deleteAddressLine(city.controls.addressLines, j)
+                        "
                       >
                         <span
                           class="glyphicon glyphicon-minus"
@@ -127,8 +101,8 @@ Value: {{ myForm.value | json }}
     </div>
   </div>
 
-  <!-- <button type="submit" class="btn btn-success">Submit</button>
-  <button type="button" class="btn btn-basic">Cancel</button> -->
+  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="button" class="btn btn-basic">Cancel</button>
 </form>
 
-<!-- <pre>{{ myForm.value | json }}</pre> -->
+<pre>{{ myForm.value | json }}</pre>

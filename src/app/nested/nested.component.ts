@@ -15,87 +15,81 @@ import {
 export class NestedComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      name: [""],
-      groups: this.fb.array([])
+      skillsGroup: this.fb.array([])
     });
 
-    // this.setGroups();
+    this.setSkillsGroup();
   }
 
   myForm: FormGroup;
 
   data = {
-    groups: [
+    skillsGroup: [
       {
-        skills: [
+        skillsArray: [
           {
-            skill: {
-              years: null,
-              title: ""
-            }
+            skill: ""
           }
         ]
       }
     ]
   };
 
-  // onSubmit() {
-  //   alert(this.myForm.value);
-  // }
+  onSubmit() {
+    alert(this.myForm.value);
+  }
 
-  // addNewGroup() {
-  //   let control = <FormArray>this.myForm.controls.skills;
-  //   control.push(
-  //     this.fb.skills({
-  //       skills: [""],
-  //       skill: this.fb.array([])
-  //     })
-  //   );
-  // }
+  addGroup() {
+    let control = <FormArray>this.myForm.controls.skillsGroup;
+    control.push(
+      this.fb.group({
+        skills: this.fb.array([])
+      })
+    );
+  }
 
-  // deleteGroup(index) {
-  //   let control = <FormArray>this.myForm.controls.groups;
-  //   control.removeAt(index);
-  // }
+  deleteGroup(index) {
+    let control = <FormArray>this.myForm.controls.skillsGroup;
+    control.removeAt(index);
+  }
 
-  // addNewSkill(control) {
-  //   control.push(
-  //     this.fb.group({
-  //       skill: [""]
-  //     })
-  //   );
-  // }
+  addSkillArray(control) {
+    control.push(
+      this.fb.group({
+        skill: [""]
+      })
+    );
+  }
 
-  // deleteSkill(control, index) {
-  //   control.removeAt(index);
-  // }
+  deleteSkill(control, index) {
+    control.removeAt(index);
+  }
 
-  // setGroups() {
-  //   let control = <FormArray>this.myForm.controls.groups;
-  //   this.data.groups.forEach(x => {
-  //     control.push(
-  //       this.fb.group({
-  //         group: x.group,
-  //         skills: this.setSkills(x)
-  //       })
-  //     );
-  //   });
-  // }
+  setSkillsGroup() {
+    let control = <FormArray>this.myForm.controls.skillsGroup;
+    this.data.skillsGroup.forEach(x => {
+      control.push(
+        this.fb.group({
+          skillsArray: this.setSkills(x)
+        })
+      );
+    });
+  }
 
-  // setSkills(x) {
-  //   let arr = new FormArray([]);
-  //   x.skills.forEach(y => {
-  //     arr.push(
-  //       this.fb.group({
-  //         skill: y.skill
-  //       })
-  //     );
-  //   });
-  //   return arr;
-  // }
+  setSkills(x) {
+    let arr = new FormArray([]);
+    x.skillsArray.forEach(y => {
+      arr.push(
+        this.fb.group({
+          skill: y.skill
+        })
+      );
+    });
+    return arr;
+  }
   ngOnInit() {}
 
-  groups = [
+  skillsGroup = [
     {
       id: 1,
       title: "Group 1",
@@ -170,10 +164,10 @@ export class NestedComponent implements OnInit {
   }
 
   getConnectedList(): any[] {
-    return this.groups.map(x => `${x.id}`);
+    return this.skillsGroup.map(x => `${x.id}`);
   }
 
   dropGroup(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.groups, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.skillsGroup, event.previousIndex, event.currentIndex);
   }
 }

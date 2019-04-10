@@ -1,7 +1,7 @@
 <button (click)="addSkillsGroup()">Add new Skills Group</button><br /><br />
 <form [formGroup]="myForm">
   <div formArrayName="skillsGroup">
-    <div *ngFor="let temp of myForm.get('skillsGroup').controls; let i = index">
+    <div *ngFor="let temp of myForm.get('skillsGroup'); let i = index">
       <fieldset>
         <legend>
           <h3>Skills Group {{ i + 1 }}:</h3>
