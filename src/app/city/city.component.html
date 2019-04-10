@@ -13,7 +13,7 @@
   <div formArrayName="skillGroups">
     <div
       style="margin-top:5px; margin-bottom:5px;"
-      *ngFor="let city of myForm.get('skillGroups').controls; let i = index"
+      *ngFor="let group of myForm.get('skillGroups').controls; let i = index"
     >
       <fieldset>
         <legend>
@@ -36,7 +36,7 @@
                 style="margin-right:5px;"
                 type="button"
                 class="btn btn-success btn-sm"
-                (click)="addSkill(city.controls.skillArr)"
+                (click)="addSkill(group.controls.skillArr)"
               >
                 <span
                   class="glyphicon glyphicon-plus"
@@ -52,7 +52,7 @@
                 <div
                   style="margin-top:5px; margin-bottom:5px;"
                   *ngFor="
-                    let skill of city.get('skillArr').controls;
+                    let skill of group.get('skillArr').controls;
                     let j = index
                   "
                 >
@@ -80,7 +80,7 @@
                         style="margin-right:5px;"
                         type="button"
                         class="btn btn-danger btn-sm"
-                        (click)="deleteSkill(city.controls.skillArr, j)"
+                        (click)="deleteSkill(group.controls.skillArr, j)"
                       >
                         <span
                           class="glyphicon glyphicon-minus"

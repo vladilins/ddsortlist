@@ -17,7 +17,7 @@ export class CityComponent implements OnInit {
   data = {
     skillGroups: [
       {
-        city: "",
+        groupName: "",
         skillArr: [
           {
             skillName: "",
@@ -47,7 +47,7 @@ export class CityComponent implements OnInit {
     let control = <FormArray>this.myForm.controls.skillGroups;
     control.push(
       this.fb.group({
-        city: [""],
+        groupName: [""],
         skillArr: this.fb.array([])
       })
     );
@@ -76,7 +76,7 @@ export class CityComponent implements OnInit {
     this.data.skillGroups.forEach(x => {
       control.push(
         this.fb.group({
-          city: x.city,
+          groupName: x.groupName,
           skillArr: this.setSkillArr(x)
         })
       );
