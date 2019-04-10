@@ -1,6 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from "@angular/cdk/drag-drop";
+
 @Component({
   selector: "app-city",
   templateUrl: "./city.component.html",
@@ -88,5 +94,35 @@ export class CityComponent implements OnInit {
       );
     });
     return arr;
+  }
+
+  // Drag and Drop
+  dropItem(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
+
+  getConnectedList(): any[] {
+    return this.data.cities.map(x => `${x.addressLines}`);
+  }
+
+  dropGroup(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 }
