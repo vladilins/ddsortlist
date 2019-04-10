@@ -110,36 +110,36 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
+                    <div [formGroupName]="j" class="card-body">
+                      <div class="form-group">
+                        <label for="competence">Competence</label>
+                        <input
+                          formControlName="skillName"
+                          class="form-control"
+                          type="text"
+                          id="skill"
+                          name="skill"
+                          required
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="years">Years</label>
+                        <input
+                          formControlName="years"
+                          class="form-control"
+                          type="number"
+                          id="years"
+                          name="years"
+                          required
+                        />
+                      </div>
+                      <span
+                        class="oi oi-trash"
+                        (click)="deleteSkill(group.controls.skillArr, j)"
+                        placement="left"
+                      ></span>
+                    </div>
                   </ng-template>
-                  <div [formGroupName]="j" class="card-body">
-                    <div class="form-group">
-                      <label for="competence">Competence</label>
-                      <input
-                        formControlName="skillName"
-                        class="form-control"
-                        type="text"
-                        id="skill"
-                        name="skill"
-                        required
-                      />
-                    </div>
-                    <div class="form-group">
-                      <label for="years">Years</label>
-                      <input
-                        formControlName="years"
-                        class="form-control"
-                        type="number"
-                        id="years"
-                        name="years"
-                        required
-                      />
-                    </div>
-                    <span
-                      class="oi oi-trash"
-                      (click)="deleteSkill(group.controls.skillArr, j)"
-                      placement="left"
-                    ></span>
-                  </div>
                 </div>
               </div>
             </div>

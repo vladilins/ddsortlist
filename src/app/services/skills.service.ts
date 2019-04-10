@@ -8,17 +8,7 @@ import { Group } from "../models/group.model";
 })
 export class SkillsService {
   skills: Skill[] = [];
-  groups: [
-    {
-      groupName: "";
-      skillArr: [
-        {
-          skillName: "";
-          years: null;
-        }
-      ];
-    }
-  ];
+  groups: Group[];
 
   constructor() {}
 
