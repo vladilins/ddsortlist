@@ -115,7 +115,7 @@ export class CityComponent implements OnInit {
   }
 
   getConnectedList(): any[] {
-    return this.data.cities.map(x => `${x.addressLines}`);
+    return this.data.cities.map(x => `${x.city}`);
   }
 
   dropGroup(event: CdkDragDrop<string[]>) {
