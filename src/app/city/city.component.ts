@@ -15,12 +15,12 @@ import {
 export class CityComponent implements OnInit {
   ngOnInit() {}
   data = {
-    cities: [
+    skillGroups: [
       {
         city: "",
-        addressLines: [
+        skillArr: [
           {
-            addressLine: "",
+            skillName: "",
             years: null
           }
         ]
@@ -33,62 +33,62 @@ export class CityComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.myForm = this.fb.group({
       name: [""],
-      cities: this.fb.array([])
+      skillGroups: this.fb.array([])
     });
 
-    this.setCities();
+    this.setSkillGroups();
   }
 
   onSubmit() {
     alert(this.myForm.value);
   }
 
-  addNewCity() {
-    let control = <FormArray>this.myForm.controls.cities;
+  addSkillGroup() {
+    let control = <FormArray>this.myForm.controls.skillGroups;
     control.push(
       this.fb.group({
         city: [""],
-        addressLines: this.fb.array([])
+        skillArr: this.fb.array([])
       })
     );
   }
 
-  deleteCity(index) {
-    let control = <FormArray>this.myForm.controls.cities;
+  deleteSkillArrs(index) {
+    let control = <FormArray>this.myForm.controls.skillGroups;
     control.removeAt(index);
   }
 
-  addNewAddressLine(control) {
+  addSkill(control) {
     control.push(
       this.fb.group({
-        addressLine: [""],
+        skillName: [""],
         years: []
       })
     );
   }
 
-  deleteAddressLine(control, index) {
+  deleteSkill(control, index) {
     control.removeAt(index);
   }
 
-  setCities() {
-    let control = <FormArray>this.myForm.controls.cities;
-    this.data.cities.forEach(x => {
+  setSkillGroups() {
+    let control = <FormArray>this.myForm.controls.skillGroups;
+    this.data.skillGroups.forEach(x => {
       control.push(
         this.fb.group({
           city: x.city,
-          addressLines: this.setAddressLines(x)
+          skillArr: this.setSkillArr(x)
         })
       );
     });
   }
 
-  setAddressLines(x) {
+  setSkillArr(x) {
     let arr = new FormArray([]);
-    x.addressLines.forEach(y => {
+    x.skillArr.forEach(y => {
       arr.push(
         this.fb.group({
-          addressLine: y.addressLine,
+          skillName: y.skillName,
           years: y.years
         })
       );
@@ -115,7 +115,7 @@ export class CityComponent implements OnInit {
   }
 
   getConnectedList(): any[] {
-    return this.data.cities.map(x => `${x.city}`);
+    return this.data.skillGroups.map(x => `${x.skillArr}`);
   }
 
   dropGroup(event: CdkDragDrop<string[]>) {
