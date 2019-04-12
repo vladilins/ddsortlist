@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: "app-employee-group",
@@ -13,6 +18,7 @@ export class EmployeeGroupComponent implements OnInit {
     skillGroups: [
       {
         groupName: "",
+        id: this.generateId(),
         skillArr: [
           {
             skillName: "",
@@ -35,15 +41,24 @@ export class EmployeeGroupComponent implements OnInit {
     this.setSkillGroups();
   }
 
+  generateId() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+      var r = (Math.random() * 16) | 0,
+        v = c == "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
   onSubmit() {
     console.log(this.myForm.value);
+    console.log(this.data.skillGroups[0].skillArr);
   }
 
   addSkillGroup() {
     let control = <FormArray>this.myForm.controls.skillGroups;
     control.push(
       this.fb.group({
-        groupName: [""],
+        id: [""],
         skillArr: this.fb.array([])
       })
     );
@@ -72,7 +87,7 @@ export class EmployeeGroupComponent implements OnInit {
     this.data.skillGroups.forEach(x => {
       control.push(
         this.fb.group({
-          groupName: x.groupName,
+          id: x.id,
           skillArr: this.setSkillArr(x)
         })
       );
@@ -92,27 +107,56 @@ export class EmployeeGroupComponent implements OnInit {
     return arr;
   }
 
-  // Pop up Form
-  open(content) {
-    this.modalService
-      .open(content, { ariaLabelledBy: "modal-basic-title" })
-      .result.then(
-        result => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        reason => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
-  }
+  // get getSkillArr() {
+  //   return this.myForm.get("skillArr") as FormArray;
+  // }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return "by pressing ESC";
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return "by clicking on a backdrop";
+  // get getSkillGroup() {
+  //   return this.myForm.get("skillGroup") as FormArray;
+  // }
+
+  // Drag and Drop
+  dropItem(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
-      return `with: ${reason}`;
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     }
   }
+
+  getConnectedList(): any[] {
+    return this.data.skillGroups.map(x => `${x.id}`);
+  }
+
+  dropGroup(event: CdkDragDrop<string[]>) {
+    moveItemInArray(
+      this.myForm.get("skillGroups").controls,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
+  // dropGroup(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(
+  //     this.myForm.get("skillGroups").controls,
+  //     event.previousIndex,
+  //     event.currentIndex
+  //   );
+  // }
+  // dropItem(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(
+  //     this.myForm.get("skillGroups").controls,
+  //     event.previousIndex,
+  //     event.currentIndex
+  //   );
+  // }
 }

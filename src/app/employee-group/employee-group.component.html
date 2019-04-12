@@ -1,62 +1,3 @@
-<!-- <form
-  name="newCompetenceForm"
-  #newCompetenceForm="ngForm"
-  (ngSubmit)="newCompetenceForm.form.valid && addCompetence()"
-  novalidate
->
-  <div class="form-group row">
-    <label for="competence" class="col-md-4 col-form-label" i18n
-      >Competence:</label
-    >
-    <div class="col-md-7">
-      <select
-        name="competence"
-        id="competence"
-        class="form-control"
-        [(ngModel)]="newCompetence.competence.id"
-      >
-        <option *ngFor="let cg of allCompetences" [value]="cg.id">
-          {{ cg.name }}
-        </option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label for="numberOfYears" class="col-md-4 col-form-label" i18n
-      >Number of Years:</label
-    >
-    <div class="col-md-7">
-      <input
-        id="numberOfYears"
-        name="numberOfYears"
-        type="number"
-        class="form-control"
-        #numberOfYears="ngModel"
-        [(ngModel)]="newCompetence.numberOfYears"
-        required
-        min="1"
-        [ngClass]="{
-          'is-invalid': newCompetenceForm.submitted && numberOfYears.invalid
-        }"
-      />
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 text-right mt-2">
-      <button
-        id="saveButton"
-        name="saveButton"
-        type="submit"
-        class="btn btn-primary"
-        i18n
-      >
-        Save
-      </button>
-    </div>
-  </div>
-</form> -->
 <div class="container-fluid">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="col-md-12">
@@ -67,82 +8,84 @@
       </div>
     </div>
 
-    <div formArrayName="skillGroups">
+    <div
+      formArrayName="skillGroups"
+      class=""
+      cdkDropList
+      (cdkDropListDropped)="dropGroup($event)"
+      [cdkDropListData]="this.data.skillGroups"
+    >
       <div
         *ngFor="let group of myForm.get('skillGroups').controls; let i = index"
+        [cdkDragData]="group"
+        cdkDrag
+        cdkDropListGroup
       >
-        <span
-          class="oi oi-trash"
-          (click)="deleteSkillArrs(i)"
-          placement="left"
-        ></span>
-
-        <div [formGroupName]="i">
-          <div class="form-inline">
-            <div class="form-group">
-              <span
-                class="oi oi-plus"
-                (click)="addSkill(group.controls.skillArr)"
-                (click)="open(content)"
-              ></span>
-            </div>
-          </div>
-          <div class="form-inline">
-            <div class="form-group">
-              <div formArrayName="skillArr">
+        <div
+          [formGroupName]="i"
+          class="flex_list group"
+          cdkDropList
+          id="{{ group.id }}"
+          [cdkDropListData]="group.skillArr"
+          (cdkDropListDropped)="dropItem($event)"
+          [cdkDropListConnectedTo]="getConnectedList()"
+          cdkDropListOrientation="horizontal"
+        >
+          <span class="oi oi-menu drag"></span>
+          <div>
+            <div>
+              <div formArrayName="skillArr" class="flex">
                 <div
                   *ngFor="
                     let skill of group.get('skillArr').controls;
                     let j = index
                   "
+                  cdkDrag
+                  [cdkDragData]="skill"
                 >
-                  <ng-template #content let-modal>
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">
-                        Add Skills
-                      </h4>
-                      <button
-                        type="button"
-                        class="close"
-                        aria-label="Close"
-                        (click)="modal.dismiss('Cross click')"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                  <div [formGroupName]="j" class="flex">
+                    <div>
+                      <input
+                        placeholder="Competence"
+                        formControlName="skillName"
+                        type="text"
+                        id="skill"
+                        name="skill"
+                        required
+                        class="input input__competence"
+                      />
                     </div>
-                    <div [formGroupName]="j" class="card-body">
-                      <div class="form-group">
-                        <label for="competence">Competence</label>
-                        <input
-                          formControlName="skillName"
-                          class="form-control"
-                          type="text"
-                          id="skill"
-                          name="skill"
-                          required
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="years">Years</label>
-                        <input
-                          formControlName="years"
-                          class="form-control"
-                          type="number"
-                          id="years"
-                          name="years"
-                          required
-                        />
-                      </div>
-                      <span
-                        class="oi oi-trash"
-                        (click)="deleteSkill(group.controls.skillArr, j)"
-                        placement="left"
-                      ></span>
+                    <div>
+                      <input
+                        placeholder="Years"
+                        formControlName="years"
+                        type="number"
+                        id="years"
+                        name="years"
+                        required
+                        class="input input__years"
+                      />
                     </div>
-                  </ng-template>
+                    <span
+                      class="oi oi-x delete_skill"
+                      (click)="deleteSkill(group.controls.skillArr, j)"
+                      placement="left"
+                    ></span>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="group_btn">
+            <span
+              class="oi oi-trash"
+              (click)="deleteSkillArrs(i)"
+              placement="left"
+            ></span>
+            <span
+              class="oi oi-plus"
+              (click)="addSkill(group.controls.skillArr)"
+            ></span>
           </div>
         </div>
       </div>
