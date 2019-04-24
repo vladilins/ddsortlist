@@ -1,0 +1,54 @@
+<i *ngFor="let item of items">{{ item }} </i>||
+<i *ngFor="let m of matched">{{ m }} </i>
+<div cdkDropListGroup>
+  <div
+    cdkDropList
+    id="placeholder"
+    [cdkDropListEnterPredicate]="dropListEnterPredicate"
+    (cdkDropListDropped)="dropListDropped($event)"
+  ></div>
+  <div class="example-container">
+    <h2>Matched</h2>
+
+    <div class="example-container">
+      <div
+        cdkDropList
+        id="matched_list"
+        (cdkDropListDropped)="dropListDropped($event)"
+        [cdkDropListEnterPredicate]="dropListEnterPredicate"
+      >
+        <div
+          cdkDrag
+          *ngFor="let item of matched"
+          class="example-box"
+          (cdkDragMoved)="dragMoved($event)"
+        >
+          <p *ngIf="item !== 0">{{ item }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Kandidaten</h2>
+
+    <div class="example-container">
+      <div
+        cdkDropList
+        id="candidate_list_{{ i }}"
+        *ngFor="let item of items; let i = index"
+        (cdkDropListDropped)="dropListDropped($event)"
+        [cdkDropListEnterPredicate]="dropListEnterPredicate"
+      >
+        <div
+          cdkDrag
+          id="candidate_{{ i }}"
+          class="example-box"
+          (cdkDragMoved)="dragMoved($event)"
+        >
+          <p>{{ item }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

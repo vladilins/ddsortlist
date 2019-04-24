@@ -15,6 +15,7 @@ import { SkillsGroupComponent } from "./skills/skills-group/skills-group.compone
 import { NestedComponent } from "./nested/nested.component";
 import { CityComponent } from "./city/city.component";
 import { EmployeeGroupComponent } from "./employee-group/employee-group.component";
+import { GridComponent } from './grid/grid.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EmployeeGroupComponent } from "./employee-group/employee-group.componen
     SkillsGroupComponent,
     NestedComponent,
     CityComponent,
-    EmployeeGroupComponent
+    EmployeeGroupComponent,
+    GridComponent
   ],
   imports: [
     BrowserModule,
