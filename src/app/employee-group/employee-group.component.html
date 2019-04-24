@@ -10,7 +10,6 @@
 
     <div
       formArrayName="skillGroups"
-      class=""
       cdkDropList
       (cdkDropListDropped)="dropGroup($event)"
       [cdkDropListData]="this.data.skillGroups"
@@ -19,19 +18,9 @@
         *ngFor="let group of myForm.get('skillGroups').controls; let i = index"
         [cdkDragData]="group"
         cdkDrag
-        cdkDropListGroup
       >
-        <div
-          [formGroupName]="i"
-          class="flex_list group"
-          cdkDropList
-          id="{{ group.id }}"
-          [cdkDropListData]="group.skillArr"
-          (cdkDropListDropped)="dropItem($event)"
-          [cdkDropListConnectedTo]="getConnectedList()"
-          cdkDropListOrientation="horizontal"
-        >
-          <span class="oi oi-menu drag"></span>
+        <div [formGroupName]="i" class="flex_list group">
+          <span class="oi oi-menu drag" cdkDragHandle></span>
           <div>
             <div>
               <div formArrayName="skillArr" class="flex">
@@ -40,8 +29,7 @@
                     let skill of group.get('skillArr').controls;
                     let j = index
                   "
-                  cdkDrag
-                  [cdkDragData]="skill"
+                  class="connectedSortable"
                 >
                   <div [formGroupName]="j" class="flex">
                     <div>

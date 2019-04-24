@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, FormArray } from "@angular/forms";
 import {
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem
+  transferArrayItem,
+  CdkDragEnter
 } from "@angular/cdk/drag-drop";
 
 @Component({
@@ -141,7 +142,43 @@ export class NestedComponent implements OnInit {
         },
         {
           name: "Item 4 - Group 3"
-        }
+        },
+        {
+          name: "Item 1 - Group 3"
+        },
+        {
+          name: "Item 2 - Group 3"
+        },
+        {
+          name: "Item 3 - Group 3"
+        },
+        {
+          name: "Item 4 - Group 3"
+        },
+        {
+          name: "Item 1 - Group 3"
+        },
+        {
+          name: "Item 2 - Group 3"
+        },
+        {
+          name: "Item 3 - Group 3"
+        },
+        {
+          name: "Item 4 - Group 3"
+        },
+        {
+          name: "Item 1 - Group 3"
+        },
+        {
+          name: "Item 2 - Group 3"
+        },
+        {
+          name: "Item 3 - Group 3"
+        },
+        {
+          name: "Item 4 - Group 3"
+        },
       ]
     }
   ];
@@ -161,6 +198,10 @@ export class NestedComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  entered(event: CdkDragEnter) {
+    moveItemInArray(event.container.data, event.item.data, event.container.data);
   }
 
   getConnectedList(): any[] {

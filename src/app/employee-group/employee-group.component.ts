@@ -137,13 +137,13 @@ export class EmployeeGroupComponent implements OnInit {
     return this.data.skillGroups.map(x => `${x.id}`);
   }
 
-  dropGroup(event: CdkDragDrop<string[]>) {
-    moveItemInArray(
-      this.myForm.get("skillGroups").controls,
-      event.previousIndex,
-      event.currentIndex
-    );
-  }
+  // dropGroup(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(
+  //     this.myForm.get("skillGroups").controls,
+  //     event.previousIndex,
+  //     event.currentIndex
+  //   );
+  // }
 
   // dropGroup(event: CdkDragDrop<string[]>) {
   //   moveItemInArray(
