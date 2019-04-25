@@ -144,41 +144,41 @@ export class NestedComponent implements OnInit {
           name: "Item 4 - Group 3"
         },
         {
-          name: "Item 1 - Group 3"
+          name: "Item 5 - Group 3"
         },
         {
-          name: "Item 2 - Group 3"
+          name: "Item 6 - Group 3"
         },
         {
-          name: "Item 3 - Group 3"
+          name: "Item 7 - Group 3"
         },
         {
-          name: "Item 4 - Group 3"
+          name: "Item 8 - Group 3"
         },
         {
-          name: "Item 1 - Group 3"
+          name: "Item 9 - Group 3"
         },
         {
-          name: "Item 2 - Group 3"
+          name: "Item 10 - Group 3"
         },
         {
-          name: "Item 3 - Group 3"
+          name: "Item 11 - Group 3"
         },
         {
-          name: "Item 4 - Group 3"
+          name: "Item 12 - Group 3"
         },
         {
-          name: "Item 1 - Group 3"
+          name: "Item 13 - Group 3"
         },
         {
-          name: "Item 2 - Group 3"
+          name: "Item 14 - Group 3"
         },
         {
-          name: "Item 3 - Group 3"
+          name: "Item 15 - Group 3"
         },
         {
-          name: "Item 4 - Group 3"
-        },
+          name: "Item 16 - Group 3"
+        }
       ]
     }
   ];
@@ -201,7 +201,11 @@ export class NestedComponent implements OnInit {
   }
 
   entered(event: CdkDragEnter) {
-    moveItemInArray(event.container.data, event.item.data, event.container.data);
+    moveItemInArray(
+      event.container.data,
+      event.item.data,
+      event.container.data
+    );
   }
 
   getConnectedList(): any[] {
