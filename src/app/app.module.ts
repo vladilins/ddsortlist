@@ -16,6 +16,9 @@ import { NestedComponent } from "./nested/nested.component";
 import { CityComponent } from "./city/city.component";
 import { EmployeeGroupComponent } from "./employee-group/employee-group.component";
 import { GridComponent } from './grid/grid.component';
+import { FlexComponent } from './flex/flex.component';
+import { WrapComponent } from './wrap/wrap.component';
+import { GridsterModule } from 'angular-gridster2';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { GridComponent } from './grid/grid.component';
     NestedComponent,
     CityComponent,
     EmployeeGroupComponent,
-    GridComponent
+    GridComponent,
+    FlexComponent,
+    WrapComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { GridComponent } from './grid/grid.component';
     MatFormFieldModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GridsterModule
   ],
   exports: [MatFormFieldModule],
   providers: [],
