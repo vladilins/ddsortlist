@@ -19,6 +19,8 @@ import { GridComponent } from './grid/grid.component';
 import { FlexComponent } from './flex/flex.component';
 import { WrapComponent } from './wrap/wrap.component';
 import { GridsterModule } from 'angular-gridster2';
+import { DragulaComponent } from './dragula/dragula.component';
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { GridsterModule } from 'angular-gridster2';
     EmployeeGroupComponent,
     GridComponent,
     FlexComponent,
-    WrapComponent
+    WrapComponent,
+    DragulaComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { GridsterModule } from 'angular-gridster2';
     FormsModule,
     NgbModule,
     ReactiveFormsModule,
-    GridsterModule
+    GridsterModule,
+    DragulaModule.forRoot()
   ],
   exports: [MatFormFieldModule],
   providers: [],
