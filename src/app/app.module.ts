@@ -21,6 +21,8 @@ import { WrapComponent } from './wrap/wrap.component';
 import { GridsterModule } from 'angular-gridster2';
 import { DragulaComponent } from './dragula/dragula.component';
 import { DragulaModule } from 'ng2-dragula';
+import { DformComponent } from './dform/dform.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { DragulaModule } from 'ng2-dragula';
     GridComponent,
     FlexComponent,
     WrapComponent,
-    DragulaComponent
+    DragulaComponent,
+    DformComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { DragulaModule } from 'ng2-dragula';
     NgbModule,
     ReactiveFormsModule,
     GridsterModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    NgSelectModule
   ],
   exports: [MatFormFieldModule],
   providers: [],
