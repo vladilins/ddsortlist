@@ -11,10 +11,11 @@
           </div>
         </div>
         
+        
         <button  class="btn btn-primary" (click)="addCities()">Add City</button>
         <div class="form-group" [(dragulaModel)]="cities.controls"
-        dragula="LOL" formArrayName="cities">
-          <div *ngFor="let city of cities.controls; let i=index" >
+        dragula="LOL" >
+          <div *ngFor="let city of cities.controls; let i=index" formArrayName="cities">
 
             <label class="lol" >Cities</label>
             <ng-select 
@@ -27,6 +28,7 @@
              clearAllText="Clear"
              [formControlName]="i">
             </ng-select>
+            <!-- <input type="text" [formControlName]="i"> -->
           </div>
         </div>
         

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { DragulaService } from 'ng2-dragula';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 // import { NgSelectComponent } from '../../../src/ng-select/ng-select.component';
 
@@ -14,14 +15,27 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DformComponent implements OnInit {
 
-  myForm: FormGroup
+  myForm: FormGroup;
+  subs = new Subscription();
+
+  
 
   constructor(private fb: FormBuilder, private dragulaService: DragulaService) {
     this.dragulaService.createGroup("LOL", {
 
       moves: (el, source, handle) => handle.className === "lol"
     });
+
+    this.subs.add(
+      this.dragulaService
+        .drop()
+        .subscribe(({ name, el, target, source, sibling }) => {
+          console.log(name);
+
+        })
+    );
    }
+   
 
   ngOnInit() {
     this.myForm = this.fb.group({

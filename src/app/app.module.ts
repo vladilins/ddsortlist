@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import {MatChipsModule} from '@angular/material/chips';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -23,6 +24,8 @@ import { DragulaComponent } from './dragula/dragula.component';
 import { DragulaModule } from 'ng2-dragula';
 import { DformComponent } from './dform/dform.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ChipsComponent } from './chips/chips.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FlexComponent,
     WrapComponent,
     DragulaComponent,
-    DformComponent
+    DformComponent,
+    ChipsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,9 +55,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     GridsterModule,
     DragulaModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    MatChipsModule
   ],
-  exports: [MatFormFieldModule],
+  exports: [MatFormFieldModule, MatChipsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

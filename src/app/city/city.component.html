@@ -46,7 +46,8 @@
           </div>
           <div class="form-inline">
             <div class="form-group">
-              <div formArrayName="skillArr">
+              <div formArrayName="skillArr" [(dragulaModel)]="group.get('skillArr').controls"
+              dragula="M">
                 <div
                   style="margin-top:5px; margin-bottom:5px;"
                   *ngFor="
