@@ -1,13 +1,22 @@
-<mat-chip-list
+
+<div class="wrap">
+  <mat-chip-list
   class="example-chip"
-  cdkDropList 
-  cdkDropListOrientation="horizontal"
-  (cdkDropListDropped)="drop($event)">
-  <mat-chip
-    class="example-box"
-    cdkDrag
-    *ngFor="let vegetable of vegetables">
-    {{vegetable.name}}
-  </mat-chip>
+  >
+  <div dragula="M" [(dragulaModel)]="vegetables">
+    <mat-chip
+      class="example-box"
+      
+      *ngFor="let vegetable of vegetables">
+      {{vegetable.name}}
+    </mat-chip>
+  </div>
 </mat-chip-list>
+</div>
+<!-- <div class="wrap" dragula="D" [(dragulaModel)]="vegetables">
+  <div *ngFor="let vegetable of vegetables">
+    {{vegetable.name}}
+  </div>
+</div> -->
+
 {{vegetables | json}}

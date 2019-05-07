@@ -25,6 +25,9 @@ import { DragulaModule } from 'ng2-dragula';
 import { DformComponent } from './dform/dform.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ChipsComponent } from './chips/chips.component';
+import { MatIconModule, MatAutocompleteModule } from '@angular/material';
+import { ChipInputComponent } from './chip-input/chip-input.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -43,7 +46,8 @@ import { ChipsComponent } from './chips/chips.component';
     WrapComponent,
     DragulaComponent,
     DformComponent,
-    ChipsComponent
+    ChipsComponent,
+    ChipInputComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +60,12 @@ import { ChipsComponent } from './chips/chips.component';
     GridsterModule,
     DragulaModule.forRoot(),
     NgSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule
   ],
-  exports: [MatFormFieldModule, MatChipsModule],
+  exports: [MatFormFieldModule, MatChipsModule, MatIconModule, MatAutocompleteModule],
   providers: [],
   bootstrap: [AppComponent]
 })
