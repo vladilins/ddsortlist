@@ -1,7 +1,5 @@
 
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-
-
 import { DragulaService } from 'ng2-dragula';
 import {Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';

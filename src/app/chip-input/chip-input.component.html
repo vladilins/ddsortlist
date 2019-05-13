@@ -30,4 +30,31 @@
       </mat-autocomplete>
     </mat-form-field>
     {{fruits | json }}
+    <br>
+    <!-- <tag-input 
+                         
+                         
+                         [onlyFromAutocomplete]='true'
+                         identifyBy="id"
+                         displayBy="name"
+                         
+                         [dragZone]="'zone1'"
+                         [editable]="true"
+                         
+                         
+                         >
+                <tag-input-dropdown [autocompleteItems]="allFruits"
+                                    identifyBy="id"
+                                    displayBy="name">
+                </tag-input-dropdown>
+              </tag-input> -->
+              <h3>Drag and drop</h3>
+            <tag-input  [(ngModel)]="allFruits"
+                        
+                        [dragZone]="'zone1'"
+                        [editable]="true">
+                        <tag-input-dropdown [autocompleteItems]="allFruits">
+                </tag-input-dropdown>
+            </tag-input>
+            {{allFruits | json}}
   </div>

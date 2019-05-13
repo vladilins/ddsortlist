@@ -28,6 +28,7 @@ import { ChipsComponent } from './chips/chips.component';
 import { MatIconModule, MatAutocompleteModule } from '@angular/material';
 import { ChipInputComponent } from './chip-input/chip-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagInputModule } from 'ngx-chips';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatChipsModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    TagInputModule
   ],
   exports: [MatFormFieldModule, MatChipsModule, MatIconModule, MatAutocompleteModule],
   providers: [],
